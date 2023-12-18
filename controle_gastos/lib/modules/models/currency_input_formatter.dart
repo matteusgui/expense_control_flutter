@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+
+/// This class is a Text Input to format the money format in the class.
+/// 
+/// This formatter formats dots(.) for thousands and comma(,) for real values
 class CurrencyInputFormatter extends TextInputFormatter {
   final validationRegex = RegExp(r'^[\d\.]*,?\d*$');
   final replaceRegex = RegExp(r'[^\d,]+');

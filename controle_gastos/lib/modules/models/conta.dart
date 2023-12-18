@@ -1,5 +1,13 @@
 import 'package:controle_gastos/modules/models/conta_db.dart';
 
+
+/// Class to store data of debt.
+/// 
+/// This class is to be used on the INTERFACE only.
+/// 
+/// For use in the database the class to be used is [ContaDB].
+/// 
+/// At the moment the classes [Conta] and [ContaDB] does not have a super class.
 class Conta {
   final String id;
   final double price;
@@ -15,6 +23,8 @@ class Conta {
     required this.time,
   });
 
+
+  /// Creates a Conta instace from a ContaDB instance.
   factory Conta.fromContaDB(ContaDB conta) {
     /**
      * Creates a Conta instance from a ContaDB instance

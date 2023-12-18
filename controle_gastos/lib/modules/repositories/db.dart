@@ -7,8 +7,9 @@ import '../models/conta_db.dart';
 
 const tableName = 'quotes';
 
+
+/// This class instantiates a Database provider for the [Contas] and [ContasDB] classes
 class DBProvider {
-  /// This class instantiates a Database provider for the Contas and ContasDB classes
   DBProvider._();
   static final DBProvider db = DBProvider._();
   static Database? _database;
@@ -51,7 +52,10 @@ class DBProvider {
   /// 
   /// Parameters:
   /// 
-  ///   [conta]: An instance of ContaDB to be inserted in the Database. No verifications are made at this point
+  ///   [conta]: An instance of [ContaDB] to be inserted in the Database. No verifications are made at this point
+  /// 
+  /// Returns:
+  ///   [Future<void>]
   Future<void> insertConta(ContaDB conta) async {
     final db = await database;
     await db.insert(
@@ -70,7 +74,7 @@ class DBProvider {
   /// 
   /// Returns:
   /// 
-  /// None
+  ///   [Future<void>]
   Future<void> deleteConta(ContaDB conta) async {
     final db = await database;
     await db.delete(tableName, where: 'id = ?', whereArgs: [conta.id]);
