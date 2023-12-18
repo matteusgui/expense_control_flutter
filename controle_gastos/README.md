@@ -1,16 +1,9 @@
 # controle_gastos
 
-A new Flutter project.
+The project consists on an mobile app to control exepenses like market and salary receivement.
 
-## Getting Started
+At the moment the project does not have Linux, Windows or MacOS support due to the use of sqflite lib on the project.
 
-This project is a starting point for a Flutter application.
+The next step is the implementation of Drift database lib. Which will create support for the not now supported platforms.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Other further step is the use of more cleaner architecture using interfaces for the generalization of the code.
