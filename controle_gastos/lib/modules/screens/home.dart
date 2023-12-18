@@ -1,6 +1,3 @@
-import 'package:controle_gastos/modules/models/conta.dart';
-import 'package:controle_gastos/modules/models/conta_db.dart';
-import 'package:controle_gastos/modules/repositories/db.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,23 +15,13 @@ class _ControlPageState extends State<ControlPage> {
   int currentPageIndex = 0;
   bool validaInicio = true;
 
-  Future<List<ContaDB>> _fetchContasFromDatabase() async {
-    return DBProvider.db.getAllContas();
-  }
-
   @override
   Widget build(BuildContext context) {
     // Lógica utilizada para que o trecho de código seja executado somente uma vez
     // Necessário pois adContasInit chama setState que chama build, que chamaria setState novamente, gerando um loop infinito
     var appState = context.watch<ValoresState>();
     if (validaInicio) {
-      _fetchContasFromDatabase().then((value) {
-        List<Conta> novasContas = [];
-        for (var contaDb in value) {
-          novasContas.add(Conta.fromContaDB(contaDb));
-        }
-        appState.addContasInit(novasContas: novasContas);
-      });
+      appState.loadContasInit();
       validaInicio = false;
     }
 

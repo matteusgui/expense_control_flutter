@@ -11,7 +11,7 @@ import 'conta_db.dart';
 /// 
 /// This class is together with the [ContaDB] class responsible for isolating the rendering from the data logic.
 class ValoresState extends ChangeNotifier {
-  List<Conta> contas = [];
+  List<Conta> contas = [];  // Contas list to monitoring the contas in the database without needing to fetch it all the time
   double valorAtual = 0;
 
   ///Adds a [Conta] Instance to the app state and the database
@@ -25,22 +25,23 @@ class ValoresState extends ChangeNotifier {
   /// Removes a [Conta] instance from the app state and the database
   void removeConta({required Conta conta}) {
     if (contas.contains(conta)) {
-      contas.remove(conta);
+      contas.remove(conta);  // Removing conta from the vector of data
     }
-    valorAtual -= conta.price;
-    DBProvider.db.deleteConta(ContaDB.fromConta(conta));
+    valorAtual -= conta.price;  // Updating the value
+    DBProvider.db.deleteConta(ContaDB.fromConta(conta)); // Remove conta from the database
     notifyListeners();
   }
 
-  ///This method loads Contas from database to the appState
+  ///This method loads [Conta]s from database to the appState
   ///
   /// This method should run only one time on the build method of [_ControlPageState]
-  void addContasInit({required List<Conta> novasContas}) {
-    // Made to create contas from DataBase
-    /**
-     * This method should run 1 and only 1 time
-     * In the initial run of the build method of _ControlPageState
-     */
+  void loadContasInit() {
+    List<Conta> novasContas = [];
+    DBProvider.db.getAllContas().then((value) {
+      for (var contaDb in value) {
+        novasContas.add(Conta.fromContaDB(contaDb));
+      }
+    });
     var newContas = contas.toSet().union(novasContas.toSet()).toList();
     contas = newContas;
     double novoValor = 0;
